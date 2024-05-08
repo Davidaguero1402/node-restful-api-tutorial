@@ -1,21 +1,20 @@
 {
-  "name": "rest-shop",
+  "name": "node-restful-api-tutorial",
   "version": "1.0.0",
   "description": "A Node.js RESTful API Tutorial Project (Build a simple shop API)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js" 
   },
   "keywords": [
     "node",
     "restful",
     "api"
   ],
-  "author": "Maximilian Schwarzmüller",
+  "author": "David Aguero", 
   "license": "ISC",
   "dependencies": {
-    "axios": "^1.6.8",
-    "expres": "^0.0.5",
-    "express": "^4.19.2"
+    "axios": "^0.21.1", 
+    "express": "^4.17.1"
   }
 }
