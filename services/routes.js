@@ -9,6 +9,6 @@ const { receiveData , sendDataintoJson } = require('./appService');
 router.post('/receive-data', receiveData);
 
 //ruta para mostrar el archivo json
-router.get('/view-data', sendDataintoJson)
+router.get('/view-data', sendDataintoJson);
 
 module.exports = router;
