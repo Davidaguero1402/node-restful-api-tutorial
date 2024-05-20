@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { isAsyncFunction } = require('util/types');
 
 // Función para guardar los datos en un archivo JSON
 async function saveDataToJson(data) {
@@ -44,6 +45,12 @@ async function receiveData(req, res, next) {
     }
 }
 
+const jsonData = require('../data/data.json');
+
+async function sendDataintoJson(req, res) {
+  res.json(jsonData)
+}
+
 module.exports = {
-    receiveData
+    receiveData, sendDataintoJson
 };
