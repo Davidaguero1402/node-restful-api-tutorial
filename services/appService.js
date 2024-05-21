@@ -11,13 +11,10 @@ async function saveDataToJson(data) {
         const filePath = path.join(dataFolderPath, 'data.json');
         let existingData = [];
         if (fs.existsSync(filePath)) {
-            const fileContent = fs.readFileSync(filePath, 'utf-8');
-            if (fileContent) {
-                existingData = JSON.parse(fileContent);
-            }
+            existingData = JSON.parse(fs.readFileSync(filePath));
         }
         existingData.push(data);
-        await fs.promises.writeFile(filePath, JSON.stringify(existingData, null, 2));
+        fs.writeFileSync(filePath, JSON.stringify(existingData, null, 2));
         console.log('Data saved to JSON file successfully');
     } catch (error) {
         console.error('Error saving data to JSON file:', error);
@@ -33,8 +30,6 @@ async function receiveData(req, res, next) {
         // Guarda los datos recibidos en un archivo JSON
         await saveDataToJson(data);
 
-        // Puedes realizar cualquier procesamiento necesario aquí
-
         res.status(200).json({
             message: 'Data received and saved successfully',
             receivedData: data
@@ -47,12 +42,21 @@ async function receiveData(req, res, next) {
     }
 }
 
-const jsonData = require('../data/data.json');
+// Función para cargar los datos desde el archivo JSON
+async function loadDataFromJson() {
+    const filePath = path.join(__dirname, '..', 'data', 'data.json');
+    if (!fs.existsSync(filePath)) {
+        fs.writeFileSync(filePath, JSON.stringify([]));  // Crea un archivo vacío si no existe
+    }
+    return JSON.parse(fs.readFileSync(filePath));
+}
 
 async function sendDataintoJson(req, res) {
-  res.json(jsonData);
+    const jsonData = await loadDataFromJson();
+    res.json(jsonData);
 };
 
 module.exports = {
-    receiveData, sendDataintoJson
+    receiveData,
+    sendDataintoJson
 };
