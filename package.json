@@ -4,17 +4,18 @@
   "description": "A Node.js RESTful API Tutorial Project (Build a simple shop API)",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js" 
+    "start": "node server.js"
   },
   "keywords": [
     "node",
     "restful",
     "api"
   ],
-  "author": "David Aguero", 
+  "author": "David Aguero",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.21.1", 
+    "axios": "^0.21.1",
+    "cors": "^2.8.5",
     "express": "^4.17.1"
   }
 }
