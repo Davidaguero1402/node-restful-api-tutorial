@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const { isAsyncFunction } = require('util/types');
 
 // Función para guardar los datos en un archivo JSON
 async function saveDataToJson(data) {
@@ -12,10 +11,13 @@ async function saveDataToJson(data) {
         const filePath = path.join(dataFolderPath, 'data.json');
         let existingData = [];
         if (fs.existsSync(filePath)) {
-            existingData = JSON.parse(fs.readFileSync(filePath));
+            const fileContent = fs.readFileSync(filePath, 'utf-8');
+            if (fileContent) {
+                existingData = JSON.parse(fileContent);
+            }
         }
         existingData.push(data);
-        fs.writeFileSync(filePath, JSON.stringify(existingData, null, 2));
+        await fs.promises.writeFile(filePath, JSON.stringify(existingData, null, 2));
         console.log('Data saved to JSON file successfully');
     } catch (error) {
         console.error('Error saving data to JSON file:', error);
@@ -47,7 +49,7 @@ async function receiveData(req, res, next) {
 
 const jsonData = require('../data/data.json');
 
-async function sendDataintoJson(req,res) {
+async function sendDataintoJson(req, res) {
   res.json(jsonData);
 };
 
