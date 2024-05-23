@@ -54,7 +54,7 @@ async function loadDataFromJson() {
 async function sendDataintoJson(req, res) {
     const jsonData = await loadDataFromJson();
     res.json(jsonData);
-    console.log("data enviada", jsonData)
+    console.log("data enviada", jsonData);
 };
 
 module.exports = {
